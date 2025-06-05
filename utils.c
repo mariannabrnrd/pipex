@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mariaber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 12:44:33 by mariaber          #+#    #+#             */
+/*   Updated: 2025/06/04 12:44:35 by mariaber         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void    ft_error(void)
 {
     perror("Error");
-    exit(EXIT_FAILURE);
+    exit(1);
 }
 
 void    ft_exec_cmd(char *av, char **ev)
@@ -28,7 +40,7 @@ void    ft_exec_cmd(char *av, char **ev)
 
 char    *ft_search_path(char *cmd, char **ev)
 {
-    char    **all_path;
+    char    **all_paths;
     char    *full_path;
     char    *temp;
     int     i;
@@ -40,9 +52,9 @@ char    *ft_search_path(char *cmd, char **ev)
     i = 0;
     while (all_paths[i])
     {
-        temp_path = ft_strjoin(all_paths[i], "/");
-        full_path = ft_strjoin(temp_path, cmd);
-        free(temp_path);
+        temp = ft_strjoin(all_paths[i], "/");
+        full_path = ft_strjoin(temp, cmd);
+        free(temp);
         if (access(full_path, F_OK) == 0)
             return (full_path);
         free(full_path);

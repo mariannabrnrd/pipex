@@ -50,13 +50,14 @@ SRCS = ft_isalnum.c  \
 FLAGS = -Wall -Wextra -Werror
 CC = gcc
 OBJS = $(SRCS:.c=.o)
-.o:.c
-	$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
+%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 $(NAME): ${OBJS}
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 all: $(NAME)
+
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 re: fclean all

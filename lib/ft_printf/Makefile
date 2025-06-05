@@ -21,18 +21,18 @@ SOURCES = ft_printf.c utils.c utils2.c
 OBJECTS = $(SOURCES:.c=.o)
 
 $(NAME): $(OBJECTS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJECTS)
+	@$(RM) $(OBJECTS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
