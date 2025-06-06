@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int     ft_file(char *filename, int flag)
+/*int     ft_file(char *filename, int flag)
 {
     int     fd;
 
@@ -29,7 +29,7 @@ int     ft_file(char *filename, int flag)
         ft_error();
     return(fd);
 
-}
+}*/
 
 void    ft_error_args(void)
 {
@@ -56,9 +56,17 @@ int     get_line(char **line)
         i++;
         byte_read = read(0, &c, 1);
     }
-    temp[i] = '\n';
-    temp[i++] = '\0';
+    temp[i++] = '\n';
+    temp[i] = '\0';
     *line = temp;
     free(temp);
     return(byte_read);
+}
+
+void    ft_close( int fd, int infile, int outfile)
+{
+    close(fd);
+    close(outfile);
+    if (infile)
+        close(infile);
 }

@@ -66,3 +66,23 @@ char    *ft_search_path(char *cmd, char **ev)
     free(all_paths);
     return (0);
 }
+
+int     ft_file(char *filename, int flag)
+{
+    int     fd;
+
+    fd = 0;
+    //write(2, "x", 1);
+    if (flag == 1)
+        fd = open(filename, O_RDONLY);
+    else if (flag == 2)
+        fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+    else if (flag == 3)
+        fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777);
+    else
+        ft_error();
+    if (fd == -1)
+        ft_error();
+    return(fd);
+
+}
