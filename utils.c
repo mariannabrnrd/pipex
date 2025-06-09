@@ -72,7 +72,6 @@ int     ft_file(char *filename, int flag)
     int     fd;
 
     fd = 0;
-    //write(2, "x", 1);
     if (flag == 1)
         fd = open(filename, O_RDONLY);
     else if (flag == 2)

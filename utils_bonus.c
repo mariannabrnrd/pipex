@@ -63,10 +63,19 @@ int     get_line(char **line)
     return(byte_read);
 }
 
-void    ft_close( int fd, int infile, int outfile)
+/*void    ft_close( int fd, int infile, int outfile)
 {
     close(fd);
+    close(infile);
     close(outfile);
-    if (infile)
+}*/
+
+void    ft_close(int fd, int infile, int outfile)
+{
+    if (fd != -1)
+        close(fd);
+    if (infile != -1)
         close(infile);
+    if (outfile != -1)
+        close(outfile);
 }
