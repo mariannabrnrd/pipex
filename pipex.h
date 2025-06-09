@@ -39,4 +39,6 @@ char	*ft_search_path(char *cmd, char **ev);
 int		ft_file(char *filename, int flag);
 int		get_line(char **line);
 void	ft_close(int fd, int infile, int outfile);
+int		ft_strcmp(char *s1, char *s2);
+void	ft_child_helper(char *eof, int fd);
 #endif

@@ -85,13 +85,12 @@ void	ft_heredoc(int ac, char *eof, int *outfile, char *filename)
 {
 	if (ac < 6)
 		ft_error_args();
-	*outfile = ft_file(filename, 3);
 	ft_child_heredoc(eof);
+	*outfile = ft_file(filename, 3);
 }
 
 void	ft_child_heredoc(char *eof)
 {
-	char	*line;
 	int		fd[2];
 	pid_t	pid;
 
@@ -101,12 +100,7 @@ void	ft_child_heredoc(char *eof)
 	if (pid == 0)
 	{
 		close(fd[0]);
-		while (get_line(&line))
-		{
-			if (ft_strncmp(line, eof, ft_strlen(eof)) == 0)
-				exit(0);
-			write(fd[1], line, ft_strlen(line));
-		}
+		ft_child_helper(eof, fd[1]);
 	}
 	else
 	{

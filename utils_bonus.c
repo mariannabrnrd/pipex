@@ -12,28 +12,15 @@
 
 #include "pipex.h"
 
-/*int     ft_file(char *filename, int flag)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	fd;
+	int	i;
 
-	fd = 0;
-	if (flag == 1)
-		fd = open(filename, O_RDONLY);
-	else if (flag == 2)
-		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	else if (flag == 3)
-		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else
-		ft_error();
-	if (fd == -1)
-		ft_error();
-	return(fd);
-}*/
-/*void	ft_error_args(void)
-{
-	ft_putstr_fd("Error: Bad argument\n", 2);
-	exit(1);
-}*/
+	i = 0;
+	while (s1 && s2 && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
 
 int	get_line(char **line)
 {
@@ -57,16 +44,27 @@ int	get_line(char **line)
 	temp[i++] = '\n';
 	temp[i] = '\0';
 	*line = temp;
-	free(temp);
 	return (byte_read);
 }
 
-/*void    ft_close( int fd, int infile, int outfile)
+void	ft_child_helper(char *eof, int fd)
 {
+	char	*line;
+
+	while (get_line(&line))
+	{
+		if (ft_strncmp(line, eof, ft_strlen(line) - 1) == 0)
+		{
+			free(line);
+			close(fd);
+			exit(0);
+		}
+		write(fd, line, ft_strlen(line));
+		free(line);
+	}
 	close(fd);
-	close(infile);
-	close(outfile);
-}*/
+}
+
 void	ft_close(int fd, int infile, int outfile)
 {
 	if (fd != -1)

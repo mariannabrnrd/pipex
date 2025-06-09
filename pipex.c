@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **ev)
 	pid_t	pid2;
 
 	if (ac != 5)
-		ft_error_args("Error: Bad arguments\n", 2);
+		ft_error_args();
 	if (pipe(fd) == -1)
 		ft_error();
 	pid1 = fork();

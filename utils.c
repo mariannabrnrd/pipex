@@ -55,7 +55,7 @@ char	*ft_search_path(char *cmd, char **ev)
 		temp = ft_strjoin(all_paths[i], "/");
 		full_path = ft_strjoin(temp, cmd);
 		free(temp);
-		if (access(full_path, F_OK) == 0)
+		if (full_path && access(full_path, F_OK) == 0)
 			return (full_path);
 		free(full_path);
 		i++;
